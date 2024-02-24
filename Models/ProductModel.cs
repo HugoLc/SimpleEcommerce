@@ -5,5 +5,7 @@ public class ProductModel{
     public string Name { get; set; }
     public string Slug { get; set; }
     public BrandModel Brand { get; set; }
-    public List<CategoryModel> Categories { get; set; }
+    public List<CategoryProductModel> Categories { get; set; }
+    public List<SkuModel> Skus { get; set; }
 }
+

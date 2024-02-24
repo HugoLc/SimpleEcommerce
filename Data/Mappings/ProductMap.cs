@@ -9,9 +9,9 @@ public class ProductMap : IEntityTypeConfiguration<ProductModel>
 {
     public void Configure(EntityTypeBuilder<ProductModel> builder)
     {
-        builder.ToTable("Category");
-        builder.HasKey(category=>category.ProductId);
-        builder.Property(category=>category.ProductId)
+        builder.ToTable("Product");
+        builder.HasKey(product=>product.ProductId);
+        builder.Property(product=>product.ProductId)
             .ValueGeneratedOnAdd();
 
         builder.Property(product => product.Name)
@@ -32,23 +32,6 @@ public class ProductMap : IEntityTypeConfiguration<ProductModel>
         builder.HasOne(product => product.Brand)
                 .WithMany(brand => brand.Products)
                 .HasConstraintName("FK_Brand_Product")
-                .OnDelete(DeleteBehavior.Cascade);
-        //TODO: ajustar many to many
-        builder.HasMany(product => product.Categories)
-                .WithMany(category => category.Products)
-                .UsingEntity<Dictionary<string, object>>(
-                    "PostTag",
-                    post => post
-                        .HasOne<CategoryModel>()
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .HasConstraintName("FK_PostRole_PostId")
-                        .OnDelete(DeleteBehavior.Cascade),
-                    tag => tag
-                        .HasOne<Post>()
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .HasConstraintName("FK_PostTag_TagId")
-                        .OnDelete(DeleteBehavior.Cascade));
+                .OnDelete(DeleteBehavior.Cascade);        
     }
 }
