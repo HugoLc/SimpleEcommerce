@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {}
+    "c:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {
+    "c:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
+        "projectUniqueName": "c:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
         "projectName": "SimpleEcommerce",
-        "projectPath": "C:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
+        "projectPath": "c:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
         "packagesPath": "C:\\Users\\Hugo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\obj\\",
+        "outputPath": "c:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Hugo\\AppData\\Roaming\\NuGet\\NuGet.Config"

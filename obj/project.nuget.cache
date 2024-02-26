@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nN1XOUL5/mi7HnA0WhQcIxV9dw8nVZ8l4SGFiZ/v2nf5G2Uox9N0N9XbtejmFJ0ifJ48afADaIu3AC5qKQZDkw==",
+  "dgSpecHash": "t9dvfwaLmsdiKyCkRNKqt7VvWTgnXCpt5wOq4PrAuDmoh6spf+sNsYKlXHAZUWMaS1YJEQ4FY2y2U/0R2y/tLA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
+  "projectFilePath": "c:\\Users\\Hugo\\Documents\\Dev\\curso-dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hugo\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Hugo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

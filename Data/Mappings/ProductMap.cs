@@ -29,6 +29,7 @@ public class ProductMap : IEntityTypeConfiguration<ProductModel>
         builder.HasIndex(product => product.Slug, "IX_Category_Slug")
                 .IsUnique();
 
+        //TODO: tentar tirar essa FK
         builder.HasOne(product => product.Brand)
                 .WithMany(brand => brand.Products)
                 .HasConstraintName("FK_Brand_Product")

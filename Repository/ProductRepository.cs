@@ -27,7 +27,7 @@ namespace SimpleEcommerce.Repository
                     Category = category,
                     Product = product
                 };
-
+                
                 _ctx.Add(categoryProduct);
             }
             
