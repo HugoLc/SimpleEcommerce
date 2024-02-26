@@ -1,36 +1,78 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEcommerce.Data;
+using SimpleEcommerce.Dto;
+using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Models;
 
 namespace SimpleEcommerce.Controllers;
 
 [ApiController]
 [Route("api/")]
-public class BrandController : ControllerBase{
+public class BrandController : Controller{
+
+    private readonly IBrandRepository _brandRepository;
+    private readonly IMapper _mapper;
+
+    public BrandController(IBrandRepository brandRepository, IMapper mapper){
+        _brandRepository = brandRepository;
+        _mapper = mapper;
+    }
+
     [HttpGet("v1/brands")]
-    public async Task<IActionResult> Get(
-        [FromServices] AppDbContext ctx
-    )=> Ok(ctx.Brands.ToList());
+    public IActionResult Get()
+    {
+        var brands = _mapper.Map<List<BrandDto>>(_brandRepository.GetBrands());
+
+        if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+        return Ok(brands);
+    }
 
     [HttpGet("v1/brands/{id:int}")]
     public async Task<IActionResult> Get(
         [FromRoute] int id,
         [FromServices] AppDbContext ctx
     ){
-        var brands = ctx.Brands.FirstOrDefault(brand => brand.BrandId == id);
-            if (brands == null)
-                return NotFound();
-            return Ok(brands);
+        var brand = _mapper.Map<BrandDto>(_brandRepository.GetBrand(id));
+
+        if(brand == null) 
+            return NotFound();
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return Ok(brand);
+
     }
 
-    [HttpPost("v1/brand")]
+    [HttpPost("v1/brands")]
     public async Task<IActionResult> Post(
-        [FromBody] BrandModel brand,
-        [FromServices] AppDbContext ctx
+        [FromBody] BrandDto brandCreate
     ){
-        ctx.Brands.Add(brand);
-        ctx.SaveChanges();
+        if (brandCreate == null)
+                return BadRequest(ModelState);
 
-        return Created($"v1/{brand.BrandId}",brand);
+        var brand = _brandRepository.GetBrands()
+            .Where(brand=> brand.Name.Trim().ToUpper() == brandCreate.Name.TrimEnd().ToUpper()).FirstOrDefault();
+
+        if (brand != null)
+        {
+            ModelState.AddModelError("", "Country already exists");
+            return StatusCode(422, ModelState);
+        }
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var brandMap = _mapper.Map<BrandModel>(brandCreate);
+        if(!_brandRepository.CreateBrand(brandMap))
+        {
+            ModelState.AddModelError("", "Something went wrong while savin");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok("Created");
     }
 }

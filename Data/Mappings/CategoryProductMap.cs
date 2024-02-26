@@ -9,13 +9,11 @@ public class CategoryProductMap : IEntityTypeConfiguration<CategoryProductModel>
         builder.HasKey(cp => new { cp.ProductId, cp.CategoryId });
         
         builder.HasOne(cp => cp.Product)
-            .WithMany(p => p.Categories)
+            .WithMany(p => p.CategoryProduct)
             .HasForeignKey(cp => cp.ProductId);
         
         builder.HasOne(cp => cp.Category)
-            .WithMany(c => c.Products)
+            .WithMany(c => c.CategoryProduct)
             .HasForeignKey(cp => cp.CategoryId);
-        
-        // Aqui você pode adicionar mais configurações específicas para CategoryProduct, se necessário
     }
 }

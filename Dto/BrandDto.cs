@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleEcommerce.ViewModels;
+namespace SimpleEcommerce.Dto;
 
-public class EditorBrandViewModel{
+public class BrandDto{
+
     [Required(ErrorMessage = "O nome é obrigatório")]
     public string Name { get; set; }
 }

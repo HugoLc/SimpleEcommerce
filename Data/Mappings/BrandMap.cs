@@ -9,11 +9,11 @@ public class BrandMap : IEntityTypeConfiguration<BrandModel>
     public void Configure(EntityTypeBuilder<BrandModel> builder)
     {
         builder.ToTable("Brand");
-        builder.HasKey(category=>category.BrandId);
-        builder.Property(category=>category.BrandId)
+        builder.HasKey(brand=>brand.BrandId);
+        builder.Property(brand=>brand.BrandId)
             .ValueGeneratedOnAdd();
 
-        builder.Property(x => x.Name)
+        builder.Property(brand => brand.Name)
                 .IsRequired()
                 .HasColumnName("Name")
                 .HasColumnType("NVARCHAR")

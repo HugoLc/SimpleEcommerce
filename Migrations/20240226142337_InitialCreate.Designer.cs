@@ -10,7 +10,7 @@ using SimpleEcommerce.Data;
 namespace SimpleEcommerce.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240224014757_InitialCreate")]
+    [Migration("20240226142337_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -143,13 +143,13 @@ namespace SimpleEcommerce.Migrations
             modelBuilder.Entity("CategoryProductModel", b =>
                 {
                     b.HasOne("SimpleEcommerce.Models.CategoryModel", "Category")
-                        .WithMany("Products")
+                        .WithMany("CategoryProduct")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SimpleEcommerce.Models.ProductModel", "Product")
-                        .WithMany("Categories")
+                        .WithMany("CategoryProduct")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -190,12 +190,12 @@ namespace SimpleEcommerce.Migrations
 
             modelBuilder.Entity("SimpleEcommerce.Models.CategoryModel", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("CategoryProduct");
                 });
 
             modelBuilder.Entity("SimpleEcommerce.Models.ProductModel", b =>
                 {
-                    b.Navigation("Categories");
+                    b.Navigation("CategoryProduct");
 
                     b.Navigation("Skus");
                 });
