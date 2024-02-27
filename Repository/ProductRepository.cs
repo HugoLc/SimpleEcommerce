@@ -14,13 +14,15 @@ namespace SimpleEcommerce.Repository
             _ctx = context;
             _mapper = mapper;
         }
-        //TODO: nao pode ser simples assim. preciso pegar a informação da categoria para adicionar no modelo
-        public bool CreateProduct(ProductModel product, List<int> categoryIds)
+        
+        public bool CreateProduct(ProductModel product, List<int> categoryIds, int brandId)
         {
+
+            var brand = _ctx.Brands.Where(b => b.BrandId == brandId).FirstOrDefault() ?? throw new Exception($"Brand {brandId} not found");
 
             foreach (var id in categoryIds)
             {
-                var category = _ctx.Categories.Where(a => a.CategoryId == id).FirstOrDefault() ?? throw new Exception($"Category {id} not found");
+                var category = _ctx.Categories.Where(c => c.CategoryId == id).FirstOrDefault() ?? throw new Exception($"Category {id} not found");
 
                 var categoryProduct = new CategoryProductModel()
                 {
@@ -30,7 +32,7 @@ namespace SimpleEcommerce.Repository
                 
                 _ctx.Add(categoryProduct);
             }
-            
+            product.Brand = brand;
             _ctx.Add(product);
             return Save();
         }

@@ -77,7 +77,7 @@ namespace SimpleEcommerce.Controllers
             //     return BadRequest(ModelState);
 
             var productModel = _mapper.Map<ProductModel>(productCreate);
-            if(!_productRepository.CreateProduct(productModel, productCreate.CategoryIds))
+            if(!_productRepository.CreateProduct(productModel, productCreate.CategoryIds, productCreate.BrandId))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);

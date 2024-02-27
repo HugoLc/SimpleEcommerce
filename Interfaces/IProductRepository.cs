@@ -8,6 +8,6 @@ namespace SimpleEcommerce.Interfaces
     {
         IList<ProductModel> GetProducts();
         ProductModel GetProduct(int id);
-        bool CreateProduct(ProductModel product, List<int> categoryId);
+        bool CreateProduct(ProductModel product, List<int> categoryId, int brandId);
     }
 }
