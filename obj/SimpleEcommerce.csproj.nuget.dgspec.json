@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {}
+    "E:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {}
   },
   "projects": {
-    "e:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {
+    "E:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
+        "projectUniqueName": "E:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
         "projectName": "SimpleEcommerce",
-        "projectPath": "e:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
+        "projectPath": "E:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
         "packagesPath": "C:\\Users\\hugol\\.nuget\\packages\\",
-        "outputPath": "e:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\obj\\",
+        "outputPath": "E:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hugol\\AppData\\Roaming\\NuGet\\NuGet.Config",

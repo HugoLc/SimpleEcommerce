@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SimpleEcommerce.Data;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Models;
@@ -39,7 +40,11 @@ namespace SimpleEcommerce.Repository
 
         public IList<ProductModel> GetProducts()
         {
-            return [.. _ctx.Products];
+            return _ctx.Products
+                .AsNoTracking()
+                .Include(prod=> prod.Brand)
+                .Include(p=>p.CategoryProduct)
+                .ToList();
         }
 
         public ProductModel GetProduct(int id)
