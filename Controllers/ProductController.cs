@@ -23,12 +23,25 @@ namespace SimpleEcommerce.Controllers
         [HttpGet("v1/products")]
         public async Task<IActionResult> Get()
         {
-            var products = _mapper.Map<List<ProductDto>>(_productRepository.GetProducts());
+            var productModels =_productRepository.GetProducts();
+            var productDtos = new List<ProductDto>();
+            foreach (var product in productModels)
+            {
+                var prodDto = _mapper.Map<ProductDto>(product);
+                prodDto.BrandId = product.Brand.BrandId;
+                foreach (var catprod in product.CategoryProduct)
+                {
+                    prodDto.CategoryIds.Add(catprod.CategoryId);
+                }
+                // prodDto.CategoryIds
+                productDtos.Add(prodDto);
+            }
+            // var products = _mapper.Map<List<ProductDto>>(productModels);
 
             if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-            return Ok(products);
+            return Ok(productDtos);
         }
 
         [HttpGet("v1/products/{id:int}")]

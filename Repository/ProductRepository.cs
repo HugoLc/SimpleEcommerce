@@ -44,7 +44,7 @@ namespace SimpleEcommerce.Repository
 
         public ProductModel GetProduct(int id)
         {
-            return _ctx.Products.Where(category => category.ProductId == id).FirstOrDefault();
+            return _ctx.Products.Where(product => product.ProductId == id).FirstOrDefault();
         }
 
         public bool Save()
