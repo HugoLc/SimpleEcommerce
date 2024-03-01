@@ -49,6 +49,7 @@ namespace SimpleEcommerce.Repository
 
         public ProductModel GetProduct(int id)
         {
+            //TODO: ajustar usando include 
             return _ctx.Products.Where(product => product.ProductId == id).FirstOrDefault();
         }
 

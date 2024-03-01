@@ -15,6 +15,8 @@ namespace SimpleEcommerce.Data.Mappings.Profiles
             CreateMap<CategoryDto, CategoryModel>();
             CreateMap<ProductModel, ProductDto>();
             CreateMap<ProductDto, ProductModel>();
+            CreateMap<SkuModel, SkuDto>();
+            CreateMap<SkuDto, SkuModel>();
         }
     }
 }
