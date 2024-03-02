@@ -102,6 +102,35 @@ namespace SimpleEcommerce.Controllers
                 return BadRequest(ModelState);
             return Ok(productResponse);
         }
+        [HttpGet("v1/products-by-slug")]
+        public async Task<IActionResult> GetBySlug(
+            [FromQuery] string slug 
+        ){
+            var productModel = _productRepository.GetProductBySlug(slug);
+            if(productModel == null)
+                return NotFound();
+            var productResponse = new{
+                productId = productModel.ProductId,
+                name = productModel.Name,
+                slug = productModel.Slug,
+                brand = new {
+                    brandId = productModel.Brand.BrandId,
+                    name = productModel.Brand.Name
+                },
+                categoryIds = productModel.CategoryProduct.Select(cp=>cp.CategoryId),
+                skus = productModel.Skus.Select(s => new {
+                        skuId = s.SkuId,
+                        name = s.Name,
+                        imageUrl = s.ImageUrl,
+                        price = s.Price,
+                        stock = s.Stock
+                    })
+                
+            };
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(productResponse);
+        }
 
          [HttpPost("v1/products")]
         public async Task<IActionResult> Post(

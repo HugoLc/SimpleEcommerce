@@ -68,6 +68,16 @@ namespace SimpleEcommerce.Repository
                 .Where(product => product.CategoryProduct.Any(cp=>cp.CategoryId == id))
                 .ToList();
         }
+        public ProductModel GetProductBySlug(string slug)
+        {
+            return _ctx.Products
+                .AsNoTracking()
+                .Include(prod=> prod.Brand)
+                .Include(p=>p.CategoryProduct)
+                .Include(p=>p.Skus)
+                .Where(product => product.Slug == slug)
+                .FirstOrDefault();
+        }
 
         public bool Save()
         {
