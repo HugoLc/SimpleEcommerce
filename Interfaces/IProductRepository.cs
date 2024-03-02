@@ -7,7 +7,8 @@ namespace SimpleEcommerce.Interfaces
     public interface IProductRepository
     {
         IList<ProductModel> GetProducts();
-        ProductModel GetProduct(int id);
+        ProductModel GetProductById(int id);
+        IList<ProductModel> GetProductByCategory(int categoryId);
         bool CreateProduct(ProductModel product, List<int> categoryId, int brandId);
     }
 }

@@ -48,7 +48,7 @@ namespace SimpleEcommerce.Repository
                 .ToList();
         }
 
-        public ProductModel GetProduct(int id)
+        public ProductModel GetProductById(int id)
         {
             return _ctx.Products
                 .AsNoTracking()
@@ -57,6 +57,16 @@ namespace SimpleEcommerce.Repository
                 .Include(p=>p.Skus)
                 .Where(product => product.ProductId == id)
                 .FirstOrDefault();
+        }
+        public IList<ProductModel> GetProductByCategory(int id)
+        {
+            return _ctx.Products
+                .AsNoTracking()
+                .Include(prod=> prod.Brand)
+                .Include(p=>p.CategoryProduct)
+                .Include(p=>p.Skus)
+                .Where(product => product.CategoryProduct.Any(cp=>cp.CategoryId == id))
+                .ToList();
         }
 
         public bool Save()

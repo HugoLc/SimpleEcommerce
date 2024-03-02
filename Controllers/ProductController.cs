@@ -50,7 +50,7 @@ namespace SimpleEcommerce.Controllers
         public async Task<IActionResult> Get(
             [FromRoute] int id
         ){
-            var productModel = _productRepository.GetProduct(id);
+            var productModel = _productRepository.GetProductById(id);
             var productDto = _mapper.Map<ProductDto>(productModel);
             productDto.SkuIds = [];
             productDto.CategoryIds = [];
@@ -72,6 +72,17 @@ namespace SimpleEcommerce.Controllers
                 return BadRequest(ModelState);
 
             return Ok(productDto);
+        }
+        [HttpGet("v1/products-by-category/{id:int}")]
+        public async Task<IActionResult> GetByCategory(
+            [FromRoute] int id 
+        ){
+            var productModel = _productRepository.GetProductByCategory(id);
+            if(productModel == null)
+                return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(productModel);
         }
 
          [HttpPost("v1/products")]
