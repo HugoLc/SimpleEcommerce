@@ -37,7 +37,9 @@ namespace SimpleEcommerce.Repository
 
         public IList<SkuModel> GetSkus()
         {
-            return [.. _ctx.Skus];
+            return [.. _ctx.Skus
+                .AsNoTracking()
+                .Include(s=>s.Product)];
         }
 
         public bool Save()

@@ -19,12 +19,34 @@ public class SkuController : Controller{
     [HttpGet("v1/skus")]
     public async Task<IActionResult> Get(){
         var skuModels = _skuRepository.GetSkus();
-        var skuDtos = _mapper.Map<List<SkuDto>>(skuModels);
+        // var skuDtos = _mapper.Map<List<SkuDto>>(skuModels);
+        var skuDtos = new List<SkuDto>();
+        foreach (var sku in skuModels)
+        {
+            var skuDto = _mapper.Map<SkuDto>(sku);
+            skuDto.ProductId = sku.Product.ProductId;
+            skuDtos.Add(skuDto);
+        }
 
         if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
         return Ok(skuDtos);
+    }
+    [HttpGet("v1/skus/{id:int}")]
+    public async Task<IActionResult> GetById([FromRoute] int id){
+        var skuModel = _skuRepository.GetSku(id);
+        var skuDto = _mapper.Map<SkuDto>(skuModel);
+
+        if(skuDto == null)
+            return NotFound();
+
+        skuDto.ProductId = skuModel.Product.ProductId;
+
+        if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+        return Ok(skuDto);
     }
     [HttpPost("v1/skus")]
     public async Task<IActionResult> Post(

@@ -44,13 +44,19 @@ namespace SimpleEcommerce.Repository
                 .AsNoTracking()
                 .Include(prod=> prod.Brand)
                 .Include(p=>p.CategoryProduct)
+                .Include(p=>p.Skus)
                 .ToList();
         }
 
         public ProductModel GetProduct(int id)
         {
-            //TODO: ajustar usando include 
-            return _ctx.Products.Where(product => product.ProductId == id).FirstOrDefault();
+            return _ctx.Products
+                .AsNoTracking()
+                .Include(prod=> prod.Brand)
+                .Include(p=>p.CategoryProduct)
+                .Include(p=>p.Skus)
+                .Where(product => product.ProductId == id)
+                .FirstOrDefault();
         }
 
         public bool Save()

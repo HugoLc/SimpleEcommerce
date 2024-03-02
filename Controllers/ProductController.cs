@@ -30,9 +30,14 @@ namespace SimpleEcommerce.Controllers
                 var prodDto = _mapper.Map<ProductDto>(product);
                 prodDto.BrandId = product.Brand.BrandId;
                 prodDto.CategoryIds = [];
+                prodDto.SkuIds = [];
                 foreach (var catprod in product.CategoryProduct)
                 {
                     prodDto.CategoryIds.Add(catprod.CategoryId);
+                }
+                foreach (var sku in product.Skus)
+                {
+                    prodDto.SkuIds.Add(sku.SkuId);
                 }
                 productDtos.Add(prodDto);
             }
@@ -47,6 +52,8 @@ namespace SimpleEcommerce.Controllers
         ){
             var productModel = _productRepository.GetProduct(id);
             var productDto = _mapper.Map<ProductDto>(productModel);
+            productDto.SkuIds = [];
+            productDto.CategoryIds = [];
 
             if(productDto == null) 
                 return NotFound();
@@ -57,7 +64,7 @@ namespace SimpleEcommerce.Controllers
             }
             foreach (var category in productModel.CategoryProduct)
             {
-                productDto.CategoryIds.Add(category.Category.CategoryId);
+                productDto.CategoryIds.Add(category.CategoryId);
             }
 
 
