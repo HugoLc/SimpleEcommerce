@@ -80,9 +80,27 @@ namespace SimpleEcommerce.Controllers
             var productModel = _productRepository.GetProductByCategory(id);
             if(productModel == null)
                 return NotFound();
+            var productResponse = productModel.Select(p=> new{
+                productId = p.ProductId,
+                name = p.Name,
+                slug = p.Slug,
+                brand = new {
+                    brandId = p.Brand.BrandId,
+                    name = p.Brand.Name
+                },
+                categoryIds = p.CategoryProduct.Select(cp=>cp.CategoryId),
+                skus = p.Skus.Select(s => new {
+                        skuId = s.SkuId,
+                        name = s.Name,
+                        imageUrl = s.ImageUrl,
+                        price = s.Price,
+                        stock = s.Stock
+                    })
+                
+            });
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            return Ok(productModel);
+            return Ok(productResponse);
         }
 
          [HttpPost("v1/products")]
