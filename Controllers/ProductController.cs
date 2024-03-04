@@ -52,6 +52,7 @@ namespace SimpleEcommerce.Controllers
         ){
             var productModel = _productRepository.GetProductById(id);
             var productDto = _mapper.Map<ProductDto>(productModel);
+            productDto.BrandId = productModel.Brand.BrandId;
             productDto.SkuIds = [];
             productDto.CategoryIds = [];
 
