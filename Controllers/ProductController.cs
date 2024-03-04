@@ -134,10 +134,12 @@ namespace SimpleEcommerce.Controllers
 
          [HttpPost("v1/products")]
         public async Task<IActionResult> Post(
-            [FromBody] ProductDto productCreate
+            [FromBody] ProductCreateDto productCreate
         ){
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             if (productCreate == null)
-                    return BadRequest(ModelState);
+                return BadRequest(ModelState);
 
             var product = _productRepository.GetProducts()
                 .Where(product=> product.Name.Trim().ToUpper() == productCreate.Name.TrimEnd().ToUpper()).FirstOrDefault();
@@ -148,11 +150,11 @@ namespace SimpleEcommerce.Controllers
                 return StatusCode(422, ModelState);
             }
 
-            // if (!ModelState.IsValid)
-            //     return BadRequest(ModelState);
 
             var productModel = _mapper.Map<ProductModel>(productCreate);
-            if(!_productRepository.CreateProduct(productModel, productCreate.CategoryIds, productCreate.BrandId))
+            List<SkuModel> skus = [];
+            productCreate.Skus.ForEach(s=>skus.Add(_mapper.Map<SkuModel>(s)));
+            if(!_productRepository.CreateProduct(productModel, productCreate.CategoryIds, productCreate.BrandId, skus))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);

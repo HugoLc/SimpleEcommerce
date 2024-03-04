@@ -16,26 +16,43 @@ namespace SimpleEcommerce.Repository
             _mapper = mapper;
         }
         
-        public bool CreateProduct(ProductModel product, List<int> categoryIds, int brandId)
+        public bool CreateProduct(
+            ProductModel product, 
+            List<int> categoryIds, 
+            int brandId,
+            List<SkuModel> skus
+            )
         {
+            using var transaction = _ctx.Database.BeginTransaction();
+            try
+            {                
+                var brand = _ctx.Brands
+                    .Where(b => b.BrandId == brandId)
+                    .FirstOrDefault() ?? throw new Exception($"Brand {brandId} not found");
 
-            var brand = _ctx.Brands.Where(b => b.BrandId == brandId).FirstOrDefault() ?? throw new Exception($"Brand {brandId} not found");
-
-            foreach (var id in categoryIds)
-            {
-                var category = _ctx.Categories.Where(c => c.CategoryId == id).FirstOrDefault() ?? throw new Exception($"Category {id} not found");
-
-                var categoryProduct = new CategoryProductModel()
+                foreach (var id in categoryIds)
                 {
-                    Category = category,
-                    Product = product
-                };
-                
-                _ctx.Add(categoryProduct);
+                    var category = _ctx.Categories.Where(c => c.CategoryId == id).FirstOrDefault() ?? throw new Exception($"Category {id} not found");
+
+                    var categoryProduct = new CategoryProductModel()
+                    {
+                        Category = category,
+                        Product = product
+                    };
+
+                    _ctx.Add(categoryProduct);
+                }
+                product.Brand = brand;
+                _ctx.Products.Add(product);
+                Save();
+                transaction.Commit();
+                return true;
             }
-            product.Brand = brand;
-            _ctx.Add(product);
-            return Save();
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         public IList<ProductModel> GetProducts()
