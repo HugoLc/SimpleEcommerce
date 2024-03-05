@@ -1,6 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEcommerce.Dto;
+using SimpleEcommerce.Dto.Request;
+using SimpleEcommerce.Dto.Response;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Models;
 
@@ -20,10 +22,10 @@ public class SkuController : Controller{
     public async Task<IActionResult> Get(){
         var skuModels = _skuRepository.GetSkus();
         // var skuDtos = _mapper.Map<List<SkuDto>>(skuModels);
-        var skuDtos = new List<SkuDto>();
+        var skuDtos = new List<SkuResDto>();
         foreach (var sku in skuModels)
         {
-            var skuDto = _mapper.Map<SkuDto>(sku);
+            var skuDto = _mapper.Map<SkuResDto>(sku);
             skuDto.ProductId = sku.Product.ProductId;
             skuDtos.Add(skuDto);
         }
@@ -36,7 +38,7 @@ public class SkuController : Controller{
     [HttpGet("v1/skus/{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id){
         var skuModel = _skuRepository.GetSku(id);
-        var skuDto = _mapper.Map<SkuDto>(skuModel);
+        var skuDto = _mapper.Map<SkuResDto>(skuModel);
 
         if(skuDto == null)
             return NotFound();
@@ -50,7 +52,7 @@ public class SkuController : Controller{
     }
     [HttpPost("v1/skus")]
     public async Task<IActionResult> Post(
-        [FromBody] SkuDto skuCreate
+        [FromBody] SkuReqDto skuCreate
     ){
         if(skuCreate==null){
             return BadRequest(skuCreate);

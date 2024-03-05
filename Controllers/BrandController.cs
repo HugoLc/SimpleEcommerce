@@ -2,6 +2,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEcommerce.Data;
 using SimpleEcommerce.Dto;
+using SimpleEcommerce.Dto.Request;
+using SimpleEcommerce.Dto.Response;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Models;
 
@@ -22,7 +24,7 @@ public class BrandController : Controller{
     [HttpGet("v1/brands")]
     public IActionResult Get()
     {
-        var brands = _mapper.Map<List<BrandDto>>(_brandRepository.GetBrands());
+        var brands = _mapper.Map<List<BrandResDto>>(_brandRepository.GetBrands());
 
         if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -35,7 +37,7 @@ public class BrandController : Controller{
         [FromRoute] int id,
         [FromServices] AppDbContext ctx
     ){
-        var brand = _mapper.Map<BrandDto>(_brandRepository.GetBrand(id));
+        var brand = _mapper.Map<BrandResDto>(_brandRepository.GetBrand(id));
 
         if(brand == null) 
             return NotFound();
@@ -49,7 +51,7 @@ public class BrandController : Controller{
 
     [HttpPost("v1/brands")]
     public async Task<IActionResult> Post(
-        [FromBody] BrandDto brandCreate
+        [FromBody] BrandReqDto brandCreate
     ){
         if (brandCreate == null)
                 return BadRequest(ModelState);

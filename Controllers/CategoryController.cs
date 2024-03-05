@@ -2,6 +2,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEcommerce.Data;
 using SimpleEcommerce.Dto;
+using SimpleEcommerce.Dto.Request;
+using SimpleEcommerce.Dto.Response;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Models;
 
@@ -23,7 +25,7 @@ public class CategoryController : Controller{
 
     public async Task<IActionResult> Get()
     {
-        var categories = _mapper.Map<List<CategoryDto>>(_categoryRepository.GetCategories());
+        var categories = _mapper.Map<List<CategoryResDto>>(_categoryRepository.GetCategories());
 
         if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -35,7 +37,7 @@ public class CategoryController : Controller{
     public async Task<IActionResult> Get(
         [FromRoute] int id
     ){
-        var cattegory = _mapper.Map<CategoryDto>(_categoryRepository.GetCategory(id));
+        var cattegory = _mapper.Map<CategoryResDto>(_categoryRepository.GetCategory(id));
 
         if(cattegory == null) 
             return NotFound();
@@ -48,7 +50,7 @@ public class CategoryController : Controller{
 
     [HttpPost("v1/categories")]
     public async Task<IActionResult> Post(
-        [FromBody] CategoryDto categoryCreate
+        [FromBody] CategoryReqDto categoryCreate
     ){
         if (categoryCreate == null)
                 return BadRequest(ModelState);

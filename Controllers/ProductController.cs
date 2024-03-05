@@ -2,8 +2,8 @@
 
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SimpleEcommerce.Data;
-using SimpleEcommerce.Dto;
+using SimpleEcommerce.Dto.Request;
+using SimpleEcommerce.Dto.Response;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Models;
 
@@ -24,10 +24,10 @@ namespace SimpleEcommerce.Controllers
         public async Task<IActionResult> Get()
         {
             var productModels = _productRepository.GetProducts();
-            var productDtos = new List<ProductDto>();
+            var productDtos = new List<ProductResDto>();
             foreach (var product in productModels)
             {
-                var prodDto = _mapper.Map<ProductDto>(product);
+                var prodDto = _mapper.Map<ProductResDto>(product);
                 prodDto.BrandId = product.Brand.BrandId;
                 prodDto.CategoryIds = [];
                 prodDto.SkuIds = [];
@@ -51,7 +51,7 @@ namespace SimpleEcommerce.Controllers
             [FromRoute] int id
         ){
             var productModel = _productRepository.GetProductById(id);
-            var productDto = _mapper.Map<ProductDto>(productModel);
+            var productDto = _mapper.Map<ProductResDto>(productModel);
             productDto.BrandId = productModel.Brand.BrandId;
             productDto.SkuIds = [];
             productDto.CategoryIds = [];
@@ -135,7 +135,7 @@ namespace SimpleEcommerce.Controllers
 
          [HttpPost("v1/products")]
         public async Task<IActionResult> Post(
-            [FromBody] ProductCreateDto productCreate
+            [FromBody] ProductReqDto productCreate
         ){
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
