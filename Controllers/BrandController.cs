@@ -77,4 +77,29 @@ public class BrandController : Controller{
 
         return Ok("Created");
     }
+    [HttpPut("v1/brands/{id:int}")]
+    public async Task<IActionResult> Put(
+        [FromRoute] int id,
+        [FromBody] BrandReqDto brandUpdate
+    ){
+        if(id == 0 || brandUpdate == null)
+            return BadRequest();
+        var brandModel = _mapper.Map<BrandModel>(brandUpdate);
+        brandModel.BrandId = id;
+        try
+        {
+            var finalBrand = _brandRepository.UpdateBrand(brandModel);
+            return Ok(new {
+                brandId = finalBrand.BrandId,
+                name = finalBrand.Name,
+                products = finalBrand.Products.Select(p=> p.ProductId)
+            }); 
+        }
+        catch (System.Exception)
+        {
+            throw;
+        } 
+
+    }
+    
 }

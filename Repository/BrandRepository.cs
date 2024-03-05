@@ -23,6 +23,14 @@ namespace SimpleEcommerce.Repository
             _ctx.Add(brand);
             return Save();
         }
+        public BrandModel UpdateBrand(BrandModel brand)
+        {
+            var brandProducts = _ctx.Products.Where(p=> p.Brand.BrandId == brand.BrandId).ToList();
+            brand.Products = brandProducts;
+            _ctx.Brands.Update(brand);
+            Save();
+            return GetBrand(brand.BrandId);
+        }
 
         public BrandModel GetBrand(int id)
         {
