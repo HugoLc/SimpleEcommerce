@@ -76,4 +76,28 @@ public class CategoryController : Controller{
 
         return Ok("Created");
     }
+
+    [HttpPut("v1/categories/{id:int}")]
+    public async Task<IActionResult> Put(
+        [FromRoute] int id,
+        [FromBody] CategoryReqDto categoryUpdate
+    )
+    {
+        if(id == 0 || categoryUpdate == null)
+            return BadRequest();
+        var category = _mapper.Map<CategoryModel>(categoryUpdate);
+        category.CategoryId = id;
+        try
+        {
+            var finalCategory = _categoryRepository.UpdateCategory(category);
+            return Ok(new {
+                categoryId = finalCategory.CategoryId,
+                name = finalCategory.Name
+            });
+        }
+        catch (System.Exception)
+        {
+            throw;
+        }
+    }
 }

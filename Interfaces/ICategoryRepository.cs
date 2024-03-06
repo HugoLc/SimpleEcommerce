@@ -6,5 +6,6 @@ public interface ICategoryRepository
 {
     IList<CategoryModel> GetCategories();
     CategoryModel GetCategory(int id);
+    CategoryModel UpdateCategory(CategoryModel category);
     bool CreateCategory(CategoryModel category);
 }

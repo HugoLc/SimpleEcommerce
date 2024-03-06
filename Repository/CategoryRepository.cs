@@ -31,6 +31,15 @@ namespace SimpleEcommerce.Repository
         {
             return _ctx.Categories.Where(category => category.CategoryId == id).FirstOrDefault();
         }
+        public CategoryModel UpdateCategory(CategoryModel category)
+        {
+            var categoryProducts = _ctx.CategoryProduct.Where(cp=>cp.CategoryId ==category.CategoryId).ToList();
+            category.CategoryProduct = categoryProducts;
+            _ctx.Categories.Update(category);
+            Save();
+            return GetCategory(category.CategoryId);
+
+        }
 
         public bool Save()
         {
