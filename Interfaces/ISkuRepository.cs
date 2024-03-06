@@ -6,6 +6,7 @@ namespace SimpleEcommerce.Interfaces
     {
         IList<SkuModel> GetSkus();
         SkuModel GetSku(int id);
+        SkuModel UpdateSku(SkuModel sku);
         bool CreateSku(SkuModel sku, int productId);
     }
 }

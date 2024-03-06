@@ -84,6 +84,8 @@ public class BrandController : Controller{
     ){
         if(id == 0 || brandUpdate == null)
             return BadRequest();
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
         var brandModel = _mapper.Map<BrandModel>(brandUpdate);
         brandModel.BrandId = id;
         try

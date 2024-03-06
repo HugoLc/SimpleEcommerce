@@ -47,5 +47,19 @@ namespace SimpleEcommerce.Repository
             var saved = _ctx.SaveChanges();
             return saved > 0;
         }
+
+        public SkuModel UpdateSku(SkuModel sku)
+        {
+            var skuEntity = _ctx.Skus
+                .AsNoTracking()
+                .Where(s=> s.SkuId == sku.SkuId)
+                .FirstOrDefault() 
+                ?? throw new Exception("Sku not found");
+            sku.Product = skuEntity.Product;
+            _ctx.Skus.Update(sku);
+            Save();
+            return GetSku(sku.SkuId);
+
+        }
     }
 }

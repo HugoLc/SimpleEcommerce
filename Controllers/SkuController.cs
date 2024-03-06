@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using SimpleEcommerce.Dto;
 using SimpleEcommerce.Dto.Request;
 using SimpleEcommerce.Dto.Response;
@@ -72,5 +73,36 @@ public class SkuController : Controller{
             return StatusCode(500, ModelState);
         }
         return Ok("Created");
+    }
+
+    [HttpPut("v1/skus/{id:int}")]
+    public async Task<IActionResult> Put(
+        [FromBody] SkuReqDto skuUpdate,
+        [FromRoute] int id
+    ){
+        if(id == 0 || skuUpdate == null)
+            return BadRequest();
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        try
+        {
+            var sku = _mapper.Map<SkuModel>(skuUpdate);
+            sku.SkuId = id;
+            var finalSku = _skuRepository.UpdateSku(sku);
+            return Ok(new {
+                skuId = finalSku.SkuId,
+                productId = finalSku.Product.ProductId,
+                imageUrl = finalSku.ImageUrl,
+                name = finalSku.Name,
+                price = finalSku.Price,
+                stock = finalSku.Stock
+            });
+        }
+        catch (System.Exception)
+        {
+            
+            throw;
+        }
+
     }
 }

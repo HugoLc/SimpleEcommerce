@@ -85,6 +85,8 @@ public class CategoryController : Controller{
     {
         if(id == 0 || categoryUpdate == null)
             return BadRequest();
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
         var category = _mapper.Map<CategoryModel>(categoryUpdate);
         category.CategoryId = id;
         try
