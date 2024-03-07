@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SimpleEcommerce.Data;
+using SimpleEcommerce.Dto.Request;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Models;
 
@@ -95,11 +96,36 @@ namespace SimpleEcommerce.Repository
                 .Where(product => product.Slug == slug)
                 .FirstOrDefault();
         }
+        public ProductModel UpdateProduct(ProductUpdateReqDto productDto, int productId)
+        {
+            var product = _ctx.Products
+                .Include(p=>p.Skus)
+                .Where(p=>p.ProductId == productId)
+                .FirstOrDefault();
+            var categoryProducts = _ctx.CategoryProduct
+                .AsNoTracking()
+                .Where(cp=>cp.ProductId == productId)
+                .ToList();
+            var brand = _ctx.Brands
+                .AsNoTracking()
+                .Where(b=> b.BrandId == productDto.BrandId)
+                .FirstOrDefault();
+
+            product.Brand = brand;
+            product.CategoryProduct = categoryProducts;
+            product.Name = productDto.Name;
+            product.Slug = productDto.Slug;
+
+            _ctx.Products.Update(product);
+            Save();
+            return GetProductById(productId);
+        }
 
         public bool Save()
         {
             var saved = _ctx.SaveChanges();
             return saved > 0;
         }
+
     }
 }

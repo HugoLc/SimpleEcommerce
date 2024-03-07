@@ -163,6 +163,31 @@ namespace SimpleEcommerce.Controllers
 
             return Ok("Created");
         }
+        [HttpPut("v1/products/{id:int}")]
+        public async Task<IActionResult> Put(
+            [FromRoute] int id,
+            [FromBody] ProductUpdateReqDto productUpdate
+        )
+        {
+            try
+            {
+                var product = _productRepository.UpdateProduct(productUpdate, id);
+                return Ok(new {
+                    producId = product.ProductId,
+                    name = product.Name,
+                    slug = product.Slug,
+                    brandId = product.Brand.BrandId,
+                    categoryIds = product.CategoryProduct.Select(cp=> cp.CategoryId),
+                    skuIds = product.Skus.Select(s=> s.SkuId)
+                });
+
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
     }
     
 }

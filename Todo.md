@@ -7,3 +7,4 @@
 - [x] ajustar brand do get product por id
 - [ ] rotas para edit
 - [ ] rotas para delete
+- [ ] criar products por brand
