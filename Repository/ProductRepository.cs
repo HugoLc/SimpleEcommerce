@@ -121,6 +121,14 @@ namespace SimpleEcommerce.Repository
             return GetProductById(productId);
         }
 
+        public bool DeleteProduct(int id)
+        {
+            var product = _ctx.Products
+                .Where(b=>b.ProductId == id)
+                .FirstOrDefault();
+            _ctx.Products.Remove(product);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _ctx.SaveChanges();

@@ -40,6 +40,14 @@ namespace SimpleEcommerce.Repository
             return GetCategory(category.CategoryId);
 
         }
+        public bool DeleteCategory(int id)
+        {
+            var category = _ctx.Categories
+                .Where(c=>c.CategoryId == id)
+                .FirstOrDefault();
+            _ctx.Categories.Remove(category);
+            return Save();
+        }
 
         public bool Save()
         {

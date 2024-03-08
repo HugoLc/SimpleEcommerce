@@ -102,4 +102,18 @@ public class CategoryController : Controller{
             throw;
         }
     }
+    [HttpDelete("v1/categories-delete/{id:int}")]
+    public async Task<IActionResult> Delete(
+        [FromRoute] int id
+    )
+    {
+        if(id == 0)
+            return BadRequest();
+        if(!_categoryRepository.DeleteCategory(id))
+        {
+            ModelState.AddModelError("", "Something went wrong while saving");
+            return StatusCode(500, ModelState);
+        }
+        return Ok("Deleted");
+    }
 }

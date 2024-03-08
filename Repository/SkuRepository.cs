@@ -41,13 +41,6 @@ namespace SimpleEcommerce.Repository
                 .AsNoTracking()
                 .Include(s=>s.Product)];
         }
-
-        public bool Save()
-        {
-            var saved = _ctx.SaveChanges();
-            return saved > 0;
-        }
-
         public SkuModel UpdateSku(SkuModel sku)
         {
             var skuEntity = _ctx.Skus
@@ -61,5 +54,24 @@ namespace SimpleEcommerce.Repository
             return GetSku(sku.SkuId);
 
         }
+        public bool DeleteSku(int id)
+        {
+            var sku = _ctx.Skus
+                    .Include(s => s.Product)
+                    //É usado quando você espera que haja exatamente um elemento na sequência e deseja garantir isso.
+                    .SingleOrDefault(s => s.SkuId == id) 
+                    ?? throw new Exception("SKU not found.");
+            if (sku.Product.Skus.Count == 1)
+                throw new Exception("Unique SKU. Cannot be deleted.");
+            _ctx.Skus.Remove(sku);
+            return Save();
+        }
+        public bool Save()
+        {
+            var saved = _ctx.SaveChanges();
+            return saved > 0;
+        }
+
+        
     }
 }

@@ -81,7 +81,8 @@ public class BrandController : Controller{
     public async Task<IActionResult> Put(
         [FromRoute] int id,
         [FromBody] BrandReqDto brandUpdate
-    ){
+    )
+    {
         if(id == 0 || brandUpdate == null)
             return BadRequest();
         if (!ModelState.IsValid)
@@ -102,6 +103,20 @@ public class BrandController : Controller{
             throw;
         } 
 
+    }
+    [HttpDelete("v1/brands-delete/{id:int}")]
+    public async Task<IActionResult> Delete(
+        [FromRoute] int id
+    )
+    {
+        if(id == 0)
+            return BadRequest();
+        if(!_brandRepository.DeleteBrand(id))
+        {
+            ModelState.AddModelError("", "Something went wrong while savin");
+            return StatusCode(500, ModelState);
+        }
+        return Ok("Deleted");
     }
     
 }

@@ -8,4 +8,5 @@ public interface ICategoryRepository
     CategoryModel GetCategory(int id);
     CategoryModel UpdateCategory(CategoryModel category);
     bool CreateCategory(CategoryModel category);
+    bool DeleteCategory(int id);
 }

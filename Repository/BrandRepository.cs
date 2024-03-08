@@ -42,11 +42,20 @@ namespace SimpleEcommerce.Repository
             // return _ctx.Brands.ToList();
             return [.. _ctx.Brands];
         }
+        public bool DeleteBrand(int id)
+        {
+            var brand = _ctx.Brands
+                .Where(b=>b.BrandId == id)
+                .FirstOrDefault();
+            _ctx.Brands.Remove(brand);
+            return Save();
+        }
 
         public bool Save()
         {
             var saved = _ctx.SaveChanges();
             return saved > 0;
         }
+
     }
 }

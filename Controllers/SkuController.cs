@@ -105,4 +105,19 @@ public class SkuController : Controller{
         }
 
     }
+    [HttpDelete("v1/skus-delete/{id:int}")]
+    public async Task<IActionResult> Delete(
+        [FromRoute] int id
+    )
+    {
+        if(id == 0)
+            return BadRequest();
+        if(!_skuRepository.DeleteSku(id))
+        {
+            ModelState.AddModelError("", "Something went wrong while saving");
+            return StatusCode(500, ModelState);
+        }
+        return Ok("Deleted");
+    
+    }
 }
