@@ -10,7 +10,8 @@ namespace SimpleEcommerce.Interfaces
         IList<ProductModel> GetProducts();
         ProductModel GetProductById(int id);
         bool DeleteProduct(int id);
-        IList<ProductModel> GetProductByCategory(int categoryId);
+        IList<ProductModel> GetProductsByCategory(int categoryId);
+        IList<ProductModel> GetProductsByBrand(int brandId);
         ProductModel GetProductBySlug(string slug);
         bool CreateProduct(ProductModel product, List<int> categoryId, int brandId, List<SkuModel> skus);
         ProductModel UpdateProduct(ProductUpdateReqDto product, int productId);

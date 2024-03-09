@@ -47,7 +47,7 @@ namespace SimpleEcommerce.Controllers
         }
 
         [HttpGet("v1/products/{id:int}")]
-        public async Task<IActionResult> Get(
+        public async Task<IActionResult> GetById(
             [FromRoute] int id
         ){
             var productModel = _productRepository.GetProductById(id);
@@ -78,7 +78,7 @@ namespace SimpleEcommerce.Controllers
         public async Task<IActionResult> GetByCategory(
             [FromRoute] int id 
         ){
-            var productModel = _productRepository.GetProductByCategory(id);
+            var productModel = _productRepository.GetProductsByCategory(id);
             if(productModel == null)
                 return NotFound();
             var productResponse = productModel.Select(p=> new{
@@ -101,6 +101,34 @@ namespace SimpleEcommerce.Controllers
             });
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            return Ok(productResponse);
+        }
+        [HttpGet("v1/products-by-brand/{id:int}")]
+        public async Task<IActionResult> GetByBrand(
+            [FromRoute] int id 
+        )
+        {
+            var productModel = _productRepository.GetProductsByBrand(id);
+            if(productModel == null)
+                return NotFound();
+            var productResponse = productModel.Select(p=> new{
+                productId = p.ProductId,
+                name = p.Name,
+                slug = p.Slug,
+                brand = new {
+                    brandId = p.Brand.BrandId,
+                    name = p.Brand.Name
+                },
+                categoryIds = p.CategoryProduct.Select(cp=>cp.CategoryId),
+                skus = p.Skus.Select(s => new {
+                        skuId = s.SkuId,
+                        name = s.Name,
+                        imageUrl = s.ImageUrl,
+                        price = s.Price,
+                        stock = s.Stock
+                    })
+                
+            });
             return Ok(productResponse);
         }
         [HttpGet("v1/products-by-slug")]

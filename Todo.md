@@ -7,6 +7,7 @@
 - [x] ajustar brand do get product por id
 - [x] rotas para edit
 - [x] rotas para delete
-- [ ] criar products por brand
+- [X] get products por brand
 - [ ] ajustar mensagem de erro e response
 - [ ] criar chave de api
+- [ ] abstrair as responses do get by
