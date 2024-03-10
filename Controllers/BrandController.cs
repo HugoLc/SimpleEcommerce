@@ -2,7 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEcommerce.Attributes;
 using SimpleEcommerce.Data;
-using SimpleEcommerce.Dto;
 using SimpleEcommerce.Dto.Request;
 using SimpleEcommerce.Dto.Response;
 using SimpleEcommerce.Interfaces;
@@ -63,7 +62,7 @@ public class BrandController : Controller{
 
         if (brand != null)
         {
-            ModelState.AddModelError("", "Country already exists");
+            ModelState.AddModelError("modelError", "brand already exists");
             return StatusCode(422, ModelState);
         }
 
@@ -74,7 +73,7 @@ public class BrandController : Controller{
         var createdBrand = _brandRepository.CreateBrand(brandMap);
         if(createdBrand == null)
         {
-            ModelState.AddModelError("", "Something went wrong while savin");
+            ModelState.AddModelError("modelError", "Something went wrong while saving");
             return StatusCode(500, ModelState);
         }
 
@@ -116,7 +115,7 @@ public class BrandController : Controller{
             return BadRequest();
         if(!_brandRepository.DeleteBrand(id))
         {
-            ModelState.AddModelError("", "Something went wrong while savin");
+            ModelState.AddModelError("modelError", "Something went wrong while saving");
             return StatusCode(500, ModelState);
         }
         return Ok("Deleted");

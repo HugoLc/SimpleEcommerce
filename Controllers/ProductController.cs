@@ -178,7 +178,7 @@ namespace SimpleEcommerce.Controllers
 
             if (product != null)
             {
-                ModelState.AddModelError("", "Product already exists");
+                ModelState.AddModelError("modelError", "Product already exists");
                 return StatusCode(422, ModelState);
             }
 
@@ -186,13 +186,33 @@ namespace SimpleEcommerce.Controllers
             var productModel = _mapper.Map<ProductModel>(productCreate);
             List<SkuModel> skus = [];
             productCreate.Skus.ForEach(s=>skus.Add(_mapper.Map<SkuModel>(s)));
-            if(!_productRepository.CreateProduct(productModel, productCreate.CategoryIds, productCreate.BrandId, skus))
+            var createdProduct = _productRepository.CreateProduct
+                (
+                    productModel, 
+                    productCreate.CategoryIds, 
+                    productCreate.BrandId, 
+                    skus
+                );
+            if(createdProduct==null)
             {
-                ModelState.AddModelError("", "Something went wrong while saving");
+                ModelState.AddModelError("modelError", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
             }
 
-            return Ok("Created");
+            return Ok(new {
+                createdProduct.ProductId,
+                createdProduct.Name,
+                createdProduct.Slug,
+                createdProduct.Brand.BrandId,
+                categoryIds = createdProduct.CategoryProduct.Select(cp=>cp.CategoryId),
+                skus = createdProduct.Skus.Select(s=> new{
+                    s.SkuId,
+                    s.Name,
+                    s.ImageUrl,
+                    s.Price,
+                    s.Stock
+                })
+            });
         }
         [HttpPut("v1/products/{id:int}")]
         public async Task<IActionResult> Put(
@@ -221,19 +241,19 @@ namespace SimpleEcommerce.Controllers
         }
 
         [HttpDelete("v1/products-delete/{id:int}")]
-    public async Task<IActionResult> Delete(
-        [FromRoute] int id
-    )
-    {
-        if(id == 0)
-            return BadRequest();
-        if(!_productRepository.DeleteProduct(id))
+        public async Task<IActionResult> Delete(
+            [FromRoute] int id
+        )
         {
-            ModelState.AddModelError("", "Something went wrong while saving");
-            return StatusCode(500, ModelState);
+            if(id == 0)
+                return BadRequest();
+            if(!_productRepository.DeleteProduct(id))
+            {
+                ModelState.AddModelError("modelError", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Deleted");
         }
-        return Ok("Deleted");
-    }
     }
     
 }

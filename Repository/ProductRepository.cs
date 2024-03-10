@@ -17,7 +17,7 @@ namespace SimpleEcommerce.Repository
             _mapper = mapper;
         }
         
-        public bool CreateProduct(
+        public ProductModel CreateProduct(
             ProductModel product, 
             List<int> categoryIds, 
             int brandId,
@@ -47,7 +47,7 @@ namespace SimpleEcommerce.Repository
                 _ctx.Products.Add(product);
                 Save();
                 transaction.Commit();
-                return true;
+                return product;
             }
             catch (Exception)
             {

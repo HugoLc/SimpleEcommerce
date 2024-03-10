@@ -61,7 +61,7 @@ public class CategoryController : Controller{
 
         if (brand != null)
         {
-            ModelState.AddModelError("", "Category already exists");
+            ModelState.AddModelError("modelError", "Category already exists");
             return StatusCode(422, ModelState);
         }
 
@@ -69,13 +69,14 @@ public class CategoryController : Controller{
             return BadRequest(ModelState);
 
         var categoryMap = _mapper.Map<CategoryModel>(categoryCreate);
-        if(!_categoryRepository.CreateCategory(categoryMap))
+        var createdCategory = _categoryRepository.CreateCategory(categoryMap);
+        if(createdCategory == null)
         {
-            ModelState.AddModelError("", "Something went wrong while saving");
+            ModelState.AddModelError("modelError", "Something went wrong while saving");
             return StatusCode(500, ModelState);
         }
 
-        return Ok("Created");
+        return Ok(new { createdCategory.CategoryId, createdCategory.Name});
     }
 
     [HttpPut("v1/categories/{id:int}")]

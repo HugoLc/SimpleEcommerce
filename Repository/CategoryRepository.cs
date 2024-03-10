@@ -15,10 +15,11 @@ namespace SimpleEcommerce.Repository
             _mapper = mapper;
         }
 
-        public bool CreateCategory(CategoryModel category)
+        public CategoryModel CreateCategory(CategoryModel category)
         {
-            _ctx.Add(category);
-            return Save();
+            _ctx.Categories.Add(category);
+            Save();
+            return category;
         }
 
         public IList<CategoryModel> GetCategories()

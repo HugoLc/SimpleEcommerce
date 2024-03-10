@@ -13,7 +13,7 @@ namespace SimpleEcommerce.Interfaces
         IList<ProductModel> GetProductsByCategory(int categoryId);
         IList<ProductModel> GetProductsByBrand(int brandId);
         ProductModel GetProductBySlug(string slug);
-        bool CreateProduct(ProductModel product, List<int> categoryId, int brandId, List<SkuModel> skus);
+        ProductModel CreateProduct(ProductModel product, List<int> categoryId, int brandId, List<SkuModel> skus);
         ProductModel UpdateProduct(ProductUpdateReqDto product, int productId);
     }
 }
