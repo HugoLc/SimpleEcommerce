@@ -29,6 +29,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
 
 var app = builder.Build();
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

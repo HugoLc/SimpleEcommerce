@@ -1,7 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SimpleEcommerce.Data;
-using SimpleEcommerce.Dto;
+using SimpleEcommerce.Attributes;
 using SimpleEcommerce.Dto.Request;
 using SimpleEcommerce.Dto.Response;
 using SimpleEcommerce.Interfaces;
@@ -11,6 +10,8 @@ namespace SimpleEcommerce.Controllers;
 
 [ApiController]
 [Route("api/")]
+[ApiKey]
+
 public class CategoryController : Controller{
 
     private readonly ICategoryRepository _categoryRepository;

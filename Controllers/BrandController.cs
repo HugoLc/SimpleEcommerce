@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SimpleEcommerce.Attributes;
 using SimpleEcommerce.Data;
 using SimpleEcommerce.Dto;
 using SimpleEcommerce.Dto.Request;
@@ -11,6 +12,7 @@ namespace SimpleEcommerce.Controllers;
 
 [ApiController]
 [Route("api/")]
+[ApiKey]
 public class BrandController : Controller{
 
     private readonly IBrandRepository _brandRepository;

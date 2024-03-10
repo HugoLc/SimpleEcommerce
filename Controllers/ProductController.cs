@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SimpleEcommerce.Attributes;
 using SimpleEcommerce.Dto.Request;
 using SimpleEcommerce.Dto.Response;
 using SimpleEcommerce.Interfaces;
@@ -11,6 +12,8 @@ namespace SimpleEcommerce.Controllers
 {
     [ApiController]
     [Route("api/")]
+    [ApiKey]
+
     public class ProductController: Controller{
 
         private readonly IProductRepository _productRepository;
