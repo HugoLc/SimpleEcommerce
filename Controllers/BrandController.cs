@@ -71,13 +71,14 @@ public class BrandController : Controller{
             return BadRequest(ModelState);
 
         var brandMap = _mapper.Map<BrandModel>(brandCreate);
-        if(!_brandRepository.CreateBrand(brandMap))
+        var createdBrand = _brandRepository.CreateBrand(brandMap);
+        if(createdBrand == null)
         {
             ModelState.AddModelError("", "Something went wrong while savin");
             return StatusCode(500, ModelState);
         }
 
-        return Ok("Created");
+        return Ok(new {createdBrand.BrandId,createdBrand.Name});
     }
     [HttpPut("v1/brands/{id:int}")]
     public async Task<IActionResult> Put(

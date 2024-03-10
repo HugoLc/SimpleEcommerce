@@ -18,10 +18,11 @@ namespace SimpleEcommerce.Repository
             _ctx = context;
             _mapper = mapper;
         }
-        public bool CreateBrand(BrandModel brand)
+        public BrandModel CreateBrand(BrandModel brand)
         {
-            _ctx.Add(brand);
-            return Save();
+            _ctx.Brands.Add(brand);
+            Save();
+            return brand;
         }
         public BrandModel UpdateBrand(BrandModel brand)
         {
