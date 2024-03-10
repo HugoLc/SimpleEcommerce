@@ -8,6 +8,6 @@ namespace SimpleEcommerce.Interfaces
         SkuModel GetSku(int id);
         bool DeleteSku(int id);
         SkuModel UpdateSku(SkuModel sku);
-        bool CreateSku(SkuModel sku, int productId);
+        SkuModel CreateSku(SkuModel sku, int productId);
     }
 }

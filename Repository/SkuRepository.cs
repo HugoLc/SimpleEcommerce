@@ -17,13 +17,14 @@ namespace SimpleEcommerce.Repository
             _mapper = mapper;
         }
 
-        public bool CreateSku(SkuModel skuModel, int productId)
+        public SkuModel CreateSku(SkuModel skuModel, int productId)
         {
             var product = _ctx.Products.Where(p=>p.ProductId == productId).FirstOrDefault() ?? throw new Exception($"Product {productId} not found");;
 
             skuModel.Product = product;
             _ctx.Add(skuModel);
-            return Save();
+            Save();
+            return skuModel;
         }
 
         public SkuModel GetSku(int id)

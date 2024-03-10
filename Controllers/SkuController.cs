@@ -63,17 +63,25 @@ public class SkuController : Controller{
                 .Where(product=> product.Name.Trim().ToUpper() == skuCreate.Name.TrimEnd().ToUpper()).FirstOrDefault();
 
         if(skuFromDb != null){
-            ModelState.AddModelError("", "Sku already exists");
+            ModelState.AddModelError("modelError", "Sku already exists");
                 return StatusCode(422, ModelState);
         }
 
         var skuModel = _mapper.Map<SkuModel>(skuCreate);
-        if(!_skuRepository.CreateSku(skuModel, skuCreate.ProductId))
+        var createdSku = _skuRepository.CreateSku(skuModel, skuCreate.ProductId);
+        if(createdSku == null)
         {
-            ModelState.AddModelError("", "Something went wrong while saving");
+            ModelState.AddModelError("modelError", "Something went wrong while saving");
             return StatusCode(500, ModelState);
         }
-        return Ok("Created");
+        return Ok(new {
+            createdSku.SkuId,
+            createdSku.Name,
+            createdSku.ImageUrl,
+            createdSku.Price,
+            createdSku.Stock,
+            createdSku.Product.ProductId
+        });
     }
 
     [HttpPut("v1/skus/{id:int}")]
@@ -115,7 +123,7 @@ public class SkuController : Controller{
             return BadRequest();
         if(!_skuRepository.DeleteSku(id))
         {
-            ModelState.AddModelError("", "Something went wrong while saving");
+            ModelState.AddModelError("modelError", "Something went wrong while saving");
             return StatusCode(500, ModelState);
         }
         return Ok("Deleted");
