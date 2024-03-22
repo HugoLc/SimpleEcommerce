@@ -28,7 +28,6 @@ namespace SimpleEcommerce.Controllers
         {
             var productModels = _productRepository.GetProducts();
             var productDtos = new List<ProductResDto>();
-            return Ok("oi");
             foreach (var product in productModels)
             {
                 var prodDto = _mapper.Map<ProductResDto>(product);
