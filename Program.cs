@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Hosting;
+// using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using SimpleEcommerce.Data;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Repository;
@@ -26,7 +27,10 @@ builder.Services.AddScoped<ISkuRepository, SkuRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 app.UseRouting();

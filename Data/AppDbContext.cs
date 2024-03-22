@@ -12,8 +12,8 @@ public class AppDbContext : DbContext
     public DbSet<ProductModel> Products { get; set; }
     public DbSet<SkuModel> Skus { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite("DataSource=app.db;Cache=Shared");
+    // protected override void OnConfiguring(DbContextOptionsBuilder options)
+    //     => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
