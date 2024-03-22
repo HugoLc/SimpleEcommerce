@@ -26,6 +26,8 @@ namespace SimpleEcommerce.Controllers
         [HttpGet("v1/products")]
         public async Task<IActionResult> Get()
         {
+            Console.WriteLine("OI meu log");
+            return Ok("oi");
             var productModels = _productRepository.GetProducts();
             var productDtos = new List<ProductResDto>();
             foreach (var product in productModels)

@@ -22,6 +22,7 @@ public class SkuController : Controller{
 
     [HttpGet("v1/skus")]
     public async Task<IActionResult> Get(){
+
         var skuModels = _skuRepository.GetSkus();
         // var skuDtos = _mapper.Map<List<SkuDto>>(skuModels);
         var skuDtos = new List<SkuResDto>();
