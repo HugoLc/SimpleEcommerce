@@ -10,25 +10,25 @@ public class ApiKeyAttribute : Attribute, IAsyncActionFilter
     private const string ApiKey = "simple_ecommerce_IlTevUM/z0ey3NwCV/unWg==";
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyName, out var extractedApiKey))
-        {
-            context.Result = new ContentResult()
-            {
-                StatusCode = 401,
-                Content = "ApiKey não encontrada"
-            };
-            return;
-        }
+        // if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyName, out var extractedApiKey))
+        // {
+        //     context.Result = new ContentResult()
+        //     {
+        //         StatusCode = 401,
+        //         Content = "ApiKey não encontrada"
+        //     };
+        //     return;
+        // }
 
-        if (!ApiKey.Equals(extractedApiKey))
-        {
-            context.Result = new ContentResult()
-            {
-                StatusCode = 403,
-                Content = "Acesso não autorizado"
-            };
-            return;
-        }
+        // if (!ApiKey.Equals(extractedApiKey))
+        // {
+        //     context.Result = new ContentResult()
+        //     {
+        //         StatusCode = 403,
+        //         Content = "Acesso não autorizado"
+        //     };
+        //     return;
+        // }
 
         await next();
     }
