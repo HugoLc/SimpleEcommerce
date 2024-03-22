@@ -1,9 +1,14 @@
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\SimpleEcommerce.exe
+E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\publish\web.config
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\web.config
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\appsettings.Development.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\appsettings.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\appsettings.Development.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\appsettings.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\publish\appsettings.Development.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\publish\appsettings.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\publish\SimpleEcommerce.deps.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\publish\SimpleEcommerce.runtimeconfig.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\SimpleEcommerce.deps.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\publish\SimpleEcommerce.runtimeconfig.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\publish\SimpleEcommerce.dll

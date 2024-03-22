@@ -258,3 +258,13 @@ C:\Users\Hugo\Documents\Dev\curso-dotnet\SimpleEcommerce\obj\Debug\net8.0\Simple
 C:\Users\Hugo\Documents\Dev\curso-dotnet\SimpleEcommerce\obj\Debug\net8.0\ref\SimpleEcommerce.dll
 C:\Users\Hugo\Documents\Dev\curso-dotnet\SimpleEcommerce\bin\Debug\net8.0\AutoMapper.dll
 E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\AutoMapper.dll
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\publish\web.config
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\web.config
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\appsettings.Development.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\appsettings.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\publish\appsettings.Development.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\publish\appsettings.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\publish\SimpleEcommerce.deps.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\publish\SimpleEcommerce.runtimeconfig.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\SimpleEcommerce.deps.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Debug\net8.0\publish\SimpleEcommerce.runtimeconfig.json

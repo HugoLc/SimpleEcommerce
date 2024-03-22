@@ -15,6 +15,10 @@ public class AppDbContext : DbContext
     // protected override void OnConfiguring(DbContextOptionsBuilder options)
     //     => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new BrandMap());

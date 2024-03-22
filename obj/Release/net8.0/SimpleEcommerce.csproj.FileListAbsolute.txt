@@ -133,3 +133,8 @@ E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\appsettings.Devel
 E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\appsettings.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\SimpleEcommerce.deps.json
 E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\SimpleEcommerce.runtimeconfig.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\publish\web.config
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\publish\appsettings.Development.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\publish\appsettings.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\publish\SimpleEcommerce.deps.json
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\publish\publish\SimpleEcommerce.runtimeconfig.json
