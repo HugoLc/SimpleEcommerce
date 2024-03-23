@@ -16,7 +16,7 @@ public class BrandMap : IEntityTypeConfiguration<BrandModel>
         builder.Property(brand => brand.Name)
                 .IsRequired()
                 .HasColumnName("Name")
-                .HasColumnType("NVARCHAR")
+                .HasColumnType("VARCHAR")
                 .HasMaxLength(80);
     }
 }

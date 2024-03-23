@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bkDOW+eOGL6Zm1mD3PQ299J4SSWWnmRHD3vqmh3+ysi/frBkX98Be3PPWMAXOIyqFYBEv/cuXgoKm5UepfMlpA==",
+  "dgSpecHash": "3vdY2cv624pKIFnmw1eMnz278+wq1GqyWi9+VB6rf77/xL2HWPLoxzJreV5N3FlLWrm6UfiyQhqPXfFOE/l1Cw==",
   "success": true,
   "projectFilePath": "E:\\Dev\\Curso-Dotnet\\SimpleEcommerce\\SimpleEcommerce.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,8 @@
     "C:\\Users\\hugol\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\hugol\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\hugol\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\hugol\\.nuget\\packages\\npgsql\\8.0.2\\npgsql.8.0.2.nupkg.sha512",
+    "C:\\Users\\hugol\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.2\\npgsql.entityframeworkcore.postgresql.8.0.2.nupkg.sha512",
     "C:\\Users\\hugol\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
     "C:\\Users\\hugol\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
     "C:\\Users\\hugol\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",

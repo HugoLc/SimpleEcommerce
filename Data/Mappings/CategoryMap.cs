@@ -16,7 +16,7 @@ public class CategoryMap : IEntityTypeConfiguration<CategoryModel>
         builder.Property(x => x.Name)
                 .IsRequired()
                 .HasColumnName("Name")
-                .HasColumnType("NVARCHAR")
+                .HasColumnType("VARCHAR")
                 .HasMaxLength(80);
     }
 }

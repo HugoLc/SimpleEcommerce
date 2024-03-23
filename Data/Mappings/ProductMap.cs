@@ -17,7 +17,7 @@ public class ProductMap : IEntityTypeConfiguration<ProductModel>
         builder.Property(product => product.Name)
                 .IsRequired()
                 .HasColumnName("Name")
-                .HasColumnType("NVARCHAR")
+                .HasColumnType("VARCHAR")
                 .HasMaxLength(80);
 
         builder.Property(product => product.Slug)

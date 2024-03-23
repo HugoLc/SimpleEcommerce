@@ -17,7 +17,7 @@ public class SkuMap : IEntityTypeConfiguration<SkuModel>
         builder.Property(sku => sku.Name)
                 .IsRequired()
                 .HasColumnName("Name")
-                .HasColumnType("NVARCHAR")
+                .HasColumnType("VARCHAR")
                 .HasMaxLength(80);
 
         builder.Property(sku => sku.ImageUrl)

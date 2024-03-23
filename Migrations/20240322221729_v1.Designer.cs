@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SimpleEcommerce.Data;
 
 #nullable disable
@@ -10,22 +11,26 @@ using SimpleEcommerce.Data;
 namespace SimpleEcommerce.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240322194031_v1")]
+    [Migration("20240322221729_v1")]
     partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("CategoryProductModel", b =>
                 {
                     b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("ProductId", "CategoryId");
 
@@ -38,12 +43,14 @@ namespace SimpleEcommerce.Migrations
                 {
                     b.Property<int>("BrandId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BrandId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("VARCHAR")
                         .HasColumnName("Name");
 
                     b.HasKey("BrandId");
@@ -55,12 +62,14 @@ namespace SimpleEcommerce.Migrations
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("VARCHAR")
                         .HasColumnName("Name");
 
                     b.HasKey("CategoryId");
@@ -72,15 +81,17 @@ namespace SimpleEcommerce.Migrations
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
 
                     b.Property<int>("BrandId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("VARCHAR")
                         .HasColumnName("Name");
 
                     b.Property<string>("Slug")
@@ -103,7 +114,9 @@ namespace SimpleEcommerce.Migrations
                 {
                     b.Property<int>("SkuId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SkuId"));
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -114,7 +127,7 @@ namespace SimpleEcommerce.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("VARCHAR")
                         .HasColumnName("Name");
 
                     b.Property<float>("Price")
@@ -123,7 +136,7 @@ namespace SimpleEcommerce.Migrations
                         .HasColumnName("Price");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Stock")
                         .HasMaxLength(20)

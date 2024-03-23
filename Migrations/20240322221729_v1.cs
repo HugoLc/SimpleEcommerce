@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace SimpleEcommerce.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,9 +15,9 @@ namespace SimpleEcommerce.Migrations
                 name: "Brand",
                 columns: table => new
                 {
-                    BrandId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "NVARCHAR", maxLength: 80, nullable: false)
+                    BrandId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,9 +28,9 @@ namespace SimpleEcommerce.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "NVARCHAR", maxLength: 80, nullable: false)
+                    CategoryId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,11 +41,11 @@ namespace SimpleEcommerce.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "NVARCHAR", maxLength: 80, nullable: false),
+                    ProductId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
                     Slug = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
-                    BrandId = table.Column<int>(type: "INTEGER", nullable: false)
+                    BrandId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,8 +62,8 @@ namespace SimpleEcommerce.Migrations
                 name: "CategoryProduct",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ProductId = table.Column<int>(type: "integer", nullable: false),
+                    CategoryId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,11 +86,11 @@ namespace SimpleEcommerce.Migrations
                 name: "Sku",
                 columns: table => new
                 {
-                    SkuId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SkuId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ProductId = table.Column<int>(type: "integer", nullable: false),
                     ImageUrl = table.Column<string>(type: "VARCHAR", maxLength: 200, nullable: false),
-                    Name = table.Column<string>(type: "NVARCHAR", maxLength: 80, nullable: false),
+                    Name = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
                     Price = table.Column<float>(type: "DECIMAL", maxLength: 20, nullable: false),
                     Stock = table.Column<int>(type: "INTEGER", maxLength: 20, nullable: false)
                 },

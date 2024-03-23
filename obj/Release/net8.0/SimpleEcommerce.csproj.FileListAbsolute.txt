@@ -128,3 +128,5 @@ E:\Dev\Curso-Dotnet\SimpleEcommerce\obj\Release\net8.0\refint\SimpleEcommerce.dl
 E:\Dev\Curso-Dotnet\SimpleEcommerce\obj\Release\net8.0\SimpleEcommerce.pdb
 E:\Dev\Curso-Dotnet\SimpleEcommerce\obj\Release\net8.0\SimpleEcommerce.genruntimeconfig.cache
 E:\Dev\Curso-Dotnet\SimpleEcommerce\obj\Release\net8.0\ref\SimpleEcommerce.dll
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\Npgsql.dll
+E:\Dev\Curso-Dotnet\SimpleEcommerce\bin\Release\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
