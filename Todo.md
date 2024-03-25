@@ -8,6 +8,8 @@
 - [x] rotas para edit
 - [x] rotas para delete
 - [x] get products por brand
-- [ ] ajustar mensagem de erro e response
+- [x] ajustar mensagem de erro e response
 - [x] criar chave de api
 - [ ] abstrair as responses do get by
+- [ ] adicionar variações para skus
+- [ ] api key por variavel de ambiente
