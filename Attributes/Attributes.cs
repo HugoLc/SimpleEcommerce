@@ -7,18 +7,13 @@ namespace SimpleEcommerce.Attributes;
 public class ApiKeyAttribute : Attribute, IAsyncActionFilter
 {
     private const string ApiKeyName = "api_key";
-    private string ApiKey;
-    // public ApiKeyAttribute(IConfigurationRoot configuration)
-    // {
-        
-    //     ApiKey = configuration["Secrets:ApiKey"];
-    // }
+    private string _apiKey = string.Empty;
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        if (ApiKey == null)
+        if (_apiKey == null)
         {
             var configuration = (IConfiguration)context.HttpContext.RequestServices.GetService(typeof(IConfiguration));
-            ApiKey = configuration["Secrets:ApiKey"];
+            _apiKey = configuration["Secrets:ApiKey"];
         }
         if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyName, out var extractedApiKey))
         {
@@ -30,7 +25,7 @@ public class ApiKeyAttribute : Attribute, IAsyncActionFilter
             return;
         }
 
-        if (!ApiKey.Equals(extractedApiKey))
+        if (!_apiKey.Equals(extractedApiKey))
         {
             context.Result = new ContentResult()
             {

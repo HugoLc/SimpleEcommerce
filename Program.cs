@@ -52,19 +52,19 @@ app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 app.UseHttpsRedirection();
 app.MapControllers();
 
-var secrets = new Secrets();
-app.Configuration.GetSection("Secrets").Bind(secrets);
+// var secrets = new Secrets();
+// app.Configuration.GetSection("Secrets").Bind(secrets);
 
-app.MapGet("/", ()=> {
-    IConfigurationRoot configuration = new ConfigurationBuilder()
-        .AddJsonFile("appsettings.json") 
-        .Build();
-    var apiKey = configuration["Secrets:ApiKey"];
-    return new {
-        key = secrets.ApiKey,
-        keyII = apiKey
-    };
-});
+// app.MapGet("/", ()=> {
+//     IConfigurationRoot configuration = new ConfigurationBuilder()
+//         .AddJsonFile("appsettings.json") 
+//         .Build();
+//     var apiKey = configuration["Secrets:ApiKey"];
+//     return new {
+//         key = secrets.ApiKey,
+//         keyII = apiKey
+//     };
+// });
 
 app.Run();
 
