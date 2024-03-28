@@ -7,7 +7,14 @@ namespace SimpleEcommerce.Attributes;
 public class ApiKeyAttribute : Attribute, IAsyncActionFilter
 {
     private const string ApiKeyName = "api_key";
-    private const string ApiKey = "simple_ecommerce_IlTevUM/z0ey3NwCV/unWg==";
+    private string ApiKey;
+    public ApiKeyAttribute()
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json") 
+                .Build();
+            ApiKey = configuration["Secrets:ApiKey"];
+        }
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyName, out var extractedApiKey))
