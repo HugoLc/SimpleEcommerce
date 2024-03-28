@@ -8,15 +8,18 @@ public class ApiKeyAttribute : Attribute, IAsyncActionFilter
 {
     private const string ApiKeyName = "api_key";
     private string ApiKey;
-    public ApiKeyAttribute()
-        {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json") 
-                .Build();
-            ApiKey = configuration["Secrets:ApiKey"];
-        }
+    // public ApiKeyAttribute(IConfigurationRoot configuration)
+    // {
+        
+    //     ApiKey = configuration["Secrets:ApiKey"];
+    // }
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
+        if (ApiKey == null)
+        {
+            var configuration = (IConfiguration)context.HttpContext.RequestServices.GetService(typeof(IConfiguration));
+            ApiKey = configuration["Secrets:ApiKey"];
+        }
         if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyName, out var extractedApiKey))
         {
             context.Result = new ContentResult()
