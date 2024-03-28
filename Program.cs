@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 // using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using SimpleEcommerce.Attributes;
 using SimpleEcommerce.Data;
 using SimpleEcommerce.Interfaces;
 using SimpleEcommerce.Repository;
@@ -49,4 +51,24 @@ app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 app.UseHttpsRedirection();
 app.MapControllers();
+
+var secrets = new Secrets();
+app.Configuration.GetSection("Secrets").Bind(secrets);
+
+app.MapGet("/", ()=> {
+    IConfigurationRoot configuration = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json") 
+        .Build();
+    var apiKey = configuration["Secrets:ApiKey"];
+    return new {
+        key = secrets.ApiKey,
+        keyII = apiKey
+    };
+});
+
 app.Run();
+
+class Secrets 
+{    
+    public string ApiKey { get; set; } = string.Empty;
+}
